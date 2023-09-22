@@ -1,5 +1,6 @@
 import React from "react";
 import Color from "./color";
+import AddColorForm from './add-color-form';
 
 
 export default function ColorList({ colors = [], onRemoveColor = f => f, onRateColor = f => f }) {
@@ -17,6 +18,7 @@ export default function ColorList({ colors = [], onRemoveColor = f => f, onRateC
           />
         )
       }
+      <AddColorForm />
     </div>
   );
 }
