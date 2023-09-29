@@ -1,40 +1,13 @@
-import React, { useState } from 'react';
-import colorData from "../data/color-data.json";
+import React from 'react';
+
 import ColorList from "./colors/color-list";
 import AddColorForm from './colors/add-color-form';
-import { v4 } from "uuid";
+import ColorProvider from './colors/color-provider';
 
 
 export default function App() {
-  const [colors, setColors] = useState(colorData);
-
-  return <>
-    <AddColorForm
-      onNewColor={(title, color) => {
-        const newColors = [
-          ...colors,
-          {
-            id: v4(),
-            rating: 0,
-            title,
-            color
-          }
-        ];
-        setColors(newColors);
-      }}
-    />
-    <ColorList
-      colors={colors}
-      onRemoveColor={id => {
-        const newColors = colors.filter(color => color.id !== id);
-        setColors(newColors);
-      }}
-      onRateColor={(id, rating) => {
-        const newColors = colors.map(color =>
-          color.id === id ? { ...color, rating } : color
-        );
-        setColors(newColors);
-      }}
-    />;
-  </>
+  return <ColorProvider>
+    <AddColorForm />
+    <ColorList />
+  </ColorProvider>
 }
